@@ -9,3 +9,12 @@ export async function createHotel() {
     }
   });
 }
+
+export async function findHotelWithRooms(hotelId: number) {
+  return prisma.hotel.findUnique({
+    where: {
+      id: hotelId,
+    },
+    include: { Rooms: true }
+  });
+}

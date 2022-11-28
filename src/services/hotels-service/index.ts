@@ -12,19 +12,7 @@ async function getHotelsWithUserId(userId: number) {
   }
 
   const ticket = await ticketRepository.findTicketByEnrollmentId(enrollment.id);
-  console.log(ticket);
-  if (!ticket) {
-    throw notFoundError();
-  }
-
-  if(ticket.TicketType.isRemote) {
-    throw notFoundError();
-  }
-  if(!ticket.TicketType.includesHotel) {
-    throw notFoundError();
-  }
-
-  if(ticket.status != TicketStatus.PAID) {
+  if (!ticket || ticket.TicketType.isRemote || !ticket.TicketType.includesHotel || ticket.status != TicketStatus.PAID) {
     throw notFoundError();
   }
 
@@ -35,6 +23,7 @@ async function getHotelsWithUserId(userId: number) {
 
 async function findRoomsByHotel(hotelId: number) {
   const hotelRooms = await hotelsRepository.getRoomsByHotelId(hotelId);
+  console.log(hotelRooms);
   return hotelRooms;
 }
 

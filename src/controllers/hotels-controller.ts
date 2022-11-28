@@ -15,11 +15,12 @@ async function getHotels(req: AuthenticatedRequest, res: Response) {
 }
 
 async function getRoomsByHotelId(req: AuthenticatedRequest, res: Response) {
-  const hotelId = Number(req.params);
+  const { hotelId } = req.params;
+  console.log(hotelId);
 
   if(!hotelId) return res.sendStatus(httpStatus.BAD_REQUEST);
   try{
-    const hotelRooms = await hotelsService.findRoomsByHotel(hotelId);
+    const hotelRooms = await hotelsService.findRoomsByHotel(Number(hotelId));
     return res.status(httpStatus.OK).send(hotelRooms);
   }  catch (error) {
     return res.sendStatus(httpStatus.NOT_FOUND);
