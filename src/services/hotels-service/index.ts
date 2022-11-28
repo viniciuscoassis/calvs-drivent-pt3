@@ -23,7 +23,6 @@ async function getHotelsWithUserId(userId: number) {
 
 async function findRoomsByHotel(hotelId: number) {
   const hotelRooms = await hotelsRepository.getRoomsByHotelId(hotelId);
-  console.log(hotelRooms);
   return hotelRooms;
 }
 

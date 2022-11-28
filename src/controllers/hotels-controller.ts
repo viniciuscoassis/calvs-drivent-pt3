@@ -16,7 +16,6 @@ async function getHotels(req: AuthenticatedRequest, res: Response) {
 
 async function getRoomsByHotelId(req: AuthenticatedRequest, res: Response) {
   const { hotelId } = req.params;
-  console.log(hotelId);
 
   if(!hotelId) return res.sendStatus(httpStatus.BAD_REQUEST);
   try{
